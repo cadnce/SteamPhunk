@@ -220,12 +220,12 @@ public class TerrainLoader : MonoBehaviour {
 
     void loadTilesAround(int z, int x, int margin)
     {
-        for(int tilex = x - margin; tilex < x + margin; tilex++)
+        for(int tilex = x - margin; tilex <= x + margin; tilex++)
         {
-            for (int tilez = z - margin; tilez < z + margin; tilez++)
+            for (int tilez = z - margin; tilez <= z + margin; tilez++)
             {
                 worldTiles[tilex.ToString() + "_" + tilez.ToString()] = new TerrainTile(
-                    tilez, tilex, tilez + z, tilex + x);
+                    tilez, tilex, z - tilez, -(x - tilex));
             }
         }
     }
@@ -233,7 +233,7 @@ public class TerrainLoader : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        loadTilesAround(12, 8, 2);
+        loadTilesAround(16, 56, 2);
 
         // Initial tile loading
         loadAllTerrain();
